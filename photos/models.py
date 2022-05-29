@@ -11,7 +11,7 @@ class Photos(models.Model):
     def __str__(self):
         return self.name
     
-    def save_photo(self):
+    def save_photos(self):
         self.save()
     
  
@@ -20,9 +20,22 @@ class Photos(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=40)
 
+    def __str__(self) -> str:
+        return f'{self.name}'
+
+    def save_category(self):
+        self.save()
+
 
 class Location(models.Model):
     name = models.CharField(max_length=40)
+
+
+    def __str__(self) -> str:
+        return f'{self.name}'
+
+    def save_location(self):
+        self.save()
 
    
     

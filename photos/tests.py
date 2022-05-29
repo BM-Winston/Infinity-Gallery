@@ -13,4 +13,8 @@ class  PhotosTestCase(TestCase):
         self.assertTrue(isinstance(self.maldives,Photos))
 
 
-    
+    # Testing save method
+    def test_save_method(self):
+        self.maldives.save_photos()
+        photos = Photos.objects.all()
+        self.assertTrue(len(photos) > 0)
