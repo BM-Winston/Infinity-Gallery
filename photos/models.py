@@ -46,5 +46,13 @@ class Location(models.Model):
     def save_location(self):
         self.save()
 
+    def delete_location(self, location_id):
+        Location.objects.filter(id= location_id).delete()
+
+    @classmethod
+    def update_location(cls, location_id, updated_name):
+        cls.objects.filter(id=location_id).update(name = updated_name)
+
+    
    
     
