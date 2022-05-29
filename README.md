@@ -28,7 +28,7 @@ A personal gallery application that I display my photos for others to see.Users 
 ```bash
 git@github.com/BM-Winston/Infinity-Gallery.git
 ```
-##### Navigate into the folder and install requirements 
+##### Install requirements 
 ```bash
 cd Infinity-Gallery pip install -r requirements.txt
 ```
@@ -36,8 +36,8 @@ cd Infinity-Gallery pip install -r requirements.txt
 ```bash
 python3 -m venv virtual - source env/in/activate
 ```
- ##### Setup Database  
-  SetUp your database User,Password, Host then make migrate  
+ ##### Database  
+  SetUp your database. Add user and password, host then make migrations. 
  ```bash 
 python manage.py makemigrations gallery
  ``` 
@@ -50,7 +50,7 @@ python manage.py makemigrations gallery
  python manage.py runserver 
 ``` 
 
-##### Testing the application  
+##### Tests 
  ```bash 
  python manage.py test 
 ```
