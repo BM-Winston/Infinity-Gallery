@@ -20,11 +20,20 @@ class Photos(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=40)
 
-    def __str__(self) -> str:
-        return f'{self.name}'
-
+    
     def save_category(self):
         self.save()
+    
+    def delete_category(self, category_id):
+        Category.objects.filter(id= category_id).delete()
+
+    @classmethod
+    def update_category(cls, category_id, updated_name):
+        updated = cls.objects.filter(id=category_id).update(name = updated_name)
+        return updated
+
+    def __str__(self) -> str:
+        return f'{self.name}'
 
 
 class Location(models.Model):

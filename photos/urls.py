@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns=[
     url('^$',views.message,name = 'message'),
+    
 ]
