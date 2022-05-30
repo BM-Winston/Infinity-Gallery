@@ -1,1 +1,1 @@
-web: gunicorn infinity_gallery.wsgi --log-file -
+web: gunicorn photos.wsgi --log-file -
