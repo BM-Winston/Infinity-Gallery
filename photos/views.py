@@ -18,3 +18,5 @@ def search_results(request):
     else:
         message = "You have not searched for photos"
         return render(request,'index.html',{"message":message})
+
+

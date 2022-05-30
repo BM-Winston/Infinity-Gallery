@@ -2,62 +2,79 @@
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Gallery</title>
-{% block styles %}
-{% bootstrap_css %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
-{% endblock %}
+    {% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
 </head>
+
 <body>
 
-{% include "navbar.html" %}
+    {% include "navbar.html" %}
 
 
-<!-- Looping through photos -->
+    <!-- Looping through photos -->
 
 
-    <h1 style="text-align: center;" >Photos</h1>
+    <h1 style="text-align: center;">Photos</h1>
 
 
-<div class="container">
-    
+    <div class="container">
+
         <!-- Looping through news   -->
+
+
+
         {% for photo in photos %}
-    
-        <div class="row">
-            <!-- displaying photos -->
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <h2 class="text-center"> {{ photo.name }} </h2>
-            </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <img src="{{photos.image.url}}" class="img-responsive" alt="Image">
-            </div>
 
-    
+        
+        <!-- displaying photos -->
+        <div align="center" class="col-md-4">
+            <h2 class="text-center"> {{ photo.name }} </h2>
+          
+
+            {% if photo.image %}
+            <img style="height: 350px; width: 350px" src="{{photo.image.url}}" class="img-responsive" alt="No image found">
+            {% else %}
+            <p>No Image</p>
+            {% endif %}
+
+
+
         </div>
-    
+
+
+
+
+
+
+
+
         {% empty %}
         <div class="row">
             <h2 class="text-center">There Are No Photos Available</h2>
         </div>
         {% endfor %}
-    
+
     </div>
-    
-    
-   
 
 
 
- {% block scripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-{% bootstrap_javascript %}
-{% endblock %}
-    
+
+
+
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
+
 </body>
+
 </html>
