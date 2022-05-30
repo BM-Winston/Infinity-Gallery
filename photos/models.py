@@ -6,13 +6,41 @@ class Photos(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     location =models.ForeignKey('Location',on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to= 'infinity_photos/', null=True)
+
+   
+    def save_photos(self):
+        self.save()
+
+
+    def delete_photo(self, photo_id):
+        Photos.objects.filter(id= photo_id).delete()
+
+
+    @classmethod
+    def update_photo(cls, photo_id, updated_name):
+        cls.objects.filter(id=photo_id).update(name = updated_name)
+
+    @classmethod
+    def get_photo_by_id(cls, photo_id):
+        get_photo = cls.objects.get(pk = photo_id)
+        return get_photo
+
+    @classmethod
+    def search_by_category(cls, search_term):
+        photos = cls.objects.filter(category__icontains=search_term)
+        return photos
+
+
+    @classmethod
+    def filter_by_location(cls, location):
+        get_photos = cls.objects.filter(location = location)
+        return get_photos
 
 
     def __str__(self):
         return self.name
     
-    def save_photos(self):
-        self.save()
     
  
 
@@ -53,6 +81,6 @@ class Location(models.Model):
     def update_location(cls, location_id, updated_name):
         cls.objects.filter(id=location_id).update(name = updated_name)
 
-    
+
    
     

@@ -6,7 +6,8 @@ class  PhotosTestCase(TestCase):
     def setUp(self):
         self.maldives=Photos(name='Find out why Malldives is popular', description='pristine beaches and sprawling greenery', category=Category(name='islands'), location=Location(name='Indian Ocean'))
 
-        
+    def teardown(self):
+        Photos.objects.all().delete()    
 
     # Testing instance
     def test_instance(self):
@@ -18,3 +19,5 @@ class  PhotosTestCase(TestCase):
         self.maldives.save_photos()
         photos = Photos.objects.all()
         self.assertTrue(len(photos) > 0)
+
+    
