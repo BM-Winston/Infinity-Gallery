@@ -18,11 +18,18 @@
     {% include "navbar.html" %}
 
     {% for category in categories %}
+<div class="container">
 
+   
         <div class="col-sm-6 col-md-3">
-            <h1>{{category.name}}</h1>
+            {% if items %}
+            <h2>Found {{items| length}} of{{message}}</h2>
+            {{% else %}}
+            <h2>{{message}}</h2>
+            {% endif %}
 
         </div>
+</div>
 
     {% endfor %}
     {% endif %}

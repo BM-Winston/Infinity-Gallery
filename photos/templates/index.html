@@ -32,44 +32,54 @@
 
 
         {% for photo in photos %}
-
-
-        
         <!-- displaying photos -->
-        <div align="center" class="col-md-4">
+        <div align="center" class="col-md-3" data-bs-toggle="modal" data-target="#showImage{{photo.id}}">
+            
             <h2 class="text-center"> {{ photo.name }} </h2>
            
-
-          
-
             {% if photo.image %}
-            <img style="height: 350px; width: 350px" src="{{photo.image.url}}" class="img-responsive" alt="No image found">
+            <img style="height: 350%; width: 350%" src="{{photo.image.url}}" class="img-responsive" alt="No image found" class="img-fluid" >
             {% else %}
             <p>No Image</p>
             {% endif %}
-
-
-
+        
         </div>
-
-
-
-
-
-
-
-
         {% empty %}
         <div class="row">
             <h2 class="text-center">There Are No Photos Available</h2>
         </div>
+        <div class="modal" tabindex="showImage" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img style="height: 350%; width: 350%" src="{{photo.image.url}}" class="img-responsive"
+                            alt="photo.name">
+                        <p>{{photo.description}}</p>
+                        <div class="text-center">Category:{{photo.category}}</div>
+                        <div class="text-center">Category:{{photo.location}}</div>
+        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {% endfor %}
 
     </div>
 
 
-
-
+   
 
 
     {% block scripts %}

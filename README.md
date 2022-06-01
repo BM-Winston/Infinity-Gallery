@@ -34,7 +34,7 @@ cd Infinity-Gallery pip install -r requirements.txt
 ```
 ### Install and activate virtual environment
 ```bash
-python3 -m venv virtual - source env/in/activate
+python3 -m venv virtual - source virtual/in/activate
 ```
  ##### Database  
   SetUp your database. Add user and password, host then make migrations. 

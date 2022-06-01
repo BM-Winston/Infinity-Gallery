@@ -3,39 +3,42 @@ from django.db import models
 class Photos(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField()
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    location =models.ForeignKey('Location',on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True)
+    location =models.ForeignKey('Location',on_delete=models.DO_NOTHING, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to= 'infinity_photo/', null=True)
 
    
-    def save_photos(self):
+    def save_image(self):
         self.save()
 
 
-    def delete_photo(self, photo_id):
-        Photos.objects.filter(id= photo_id).delete()
-
+    def delete_image(self):
+        self.delete()
+        
+    def update_image(self, name,image, description, location,category):
+        self.image = image,
+        self.name = name,
+        self.description = description,
+        self.location = location,
+        self.category = category
+    
+    @classmethod
+    def get_image_by_id(cls,id):
+        image = cls.objects.get(image_id = id)
+        return image
 
     @classmethod
-    def update_photo(cls, photo_id, updated_name):
-        cls.objects.filter(id=photo_id).update(name = updated_name)
-
-    @classmethod
-    def get_photo_by_id(cls, photo_id):
-        get_photo = cls.objects.get(pk = photo_id)
-        return get_photo
-
-    @classmethod
-    def search_by_category(cls, search_term):
-        photos = cls.objects.filter(category__icontains=search_term)
-        return photos
+    def search_image(cls, search_term):
+        image = Photos.objects.filter(category__name__icontains=search_term)
+        return image
 
 
     @classmethod
     def filter_by_location(cls, location):
-        get_photos = cls.objects.filter(location = location)
-        return get_photos
+        image = cls.objects.filter(location__name__icontains=location)
+       
+        return image
 
 
     def __str__(self):
@@ -49,38 +52,43 @@ class Category(models.Model):
     name = models.CharField(max_length=40)
 
     
+   
+    def __str__(self):
+        return self.name
+
+
     def save_category(self):
-        self.save()
-    
-    def delete_category(self, category_id):
-        Category.objects.filter(id= category_id).delete()
+        return self.save()
+
+    def delete_category(self):
+        return self.delete()
 
     @classmethod
-    def update_category(cls, category_id, updated_name):
-        updated = cls.objects.filter(id=category_id).update(name = updated_name)
-        return updated
-
-    def __str__(self) -> str:
-        return f'{self.name}'
+    def update_category(cls, id, name):
+        cls.objects.filter(category_id=id).update(category_name=name)
 
 
 class Location(models.Model):
     name = models.CharField(max_length=40)
 
 
-    def __str__(self) -> str:
-        return f'{self.name}'
+    def __str__(self):
+        return self.name
+
 
     def save_location(self):
-        self.save()
+        return self.save()
 
-    def delete_location(self, location_id):
-        Location.objects.filter(id= location_id).delete()
+    def delete_location(self):
+        return self.delete()
 
     @classmethod
-    def update_location(cls, location_id, updated_name):
-        cls.objects.filter(id=location_id).update(name = updated_name)
+    def update_location(cls, id, name):
+        cls.objects.filter(location_id=id).update(location_name=name)
 
+
+
+  
 
    
     
